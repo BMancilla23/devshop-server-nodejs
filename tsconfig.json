@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "ESNext", // Utilice ESNext para ESM
+        "target": "ES2020", // Apunte a versiones modernas de ECMAScript
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "outDir": "./dist", // Directorio de salida para archivos compilados
+        "strict": true, // Habilita todas las advertencias de TypeScript
+        "skipLibCheck": true, // Saltar verificación de tipos de archivos de declaración
+        "resolveJsonModule": true, // Incluir importaciones JSON
+        "forceConsistentCasingInFileNames": true, // Fuerza el uso de mayúsculas en los nombres de archivos
+        "noEmit": false, // Permitir emitir salida
+        "isolatedModules": true, // Requerido para usar módulos ESM
+        "baseUrl": ".", // Permitir importaciones absolutas relativas en la raíz del proyecto
+        "paths": {
+            "*": ["node_modules/*"] // Traducción de módulos globales
+        }
+
+    }
+}
