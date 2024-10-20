@@ -5,16 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "node --import=tsx --watch --env-file=.env src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "author": "Bryan Mancilla",
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "drizzle-orm": "^0.35.2",
+    "express": "^4.21.1",
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.26.2",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3"
   }
