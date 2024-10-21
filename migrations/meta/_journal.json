@@ -22,6 +22,20 @@
       "when": 1729383066137,
       "tag": "0002_calm_odin",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1729492401945,
+      "tag": "0003_fast_red_skull",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1729526487026,
+      "tag": "0004_complex_sentinel",
+      "breakpoints": true
     }
   ]
 }
