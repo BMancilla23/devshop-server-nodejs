@@ -6,7 +6,7 @@ const DATABASE_URL = process.env.DATABASE_URL!;
 
 const drizzleOptions = {
   out: "./migrations",
-  schema: ["./src/db/schemas/products.ts"],
+  schema: ["./src/db/schemas/products.ts", "./src/db/schemas/users.ts"],
   dialect: "postgresql",
   dbCredentials: {
     url: DATABASE_URL,
