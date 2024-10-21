@@ -1,4 +1,10 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { validateRequest } from "../../middlewares/validation.middleware";
+import {
+  createProductSchema,
+  productIdSchema,
+  updateProductSchema,
+} from "../../validations/product.validator";
 import {
   createProduct,
   deleteProduct,
@@ -11,12 +17,37 @@ const router = Router();
 
 router.get("/", listProducts);
 
-router.get("/:id", getProductById);
+router.get(
+  "/:id",
+  validateRequest({
+    paramsSchema: productIdSchema,
+  }),
+  getProductById
+);
 
-router.post("/", createProduct);
+router.post(
+  "/",
+  validateRequest({
+    bodySchema: createProductSchema,
+  }),
+  createProduct
+);
 
-router.put("/:id", updateProduct);
+router.put(
+  "/:id",
+  validateRequest({
+    paramsSchema: productIdSchema,
+    bodySchema: updateProductSchema,
+  }),
+  updateProduct
+);
 
-router.delete("/:id", deleteProduct);
+router.delete(
+  "/:id",
+  validateRequest({
+    paramsSchema: productIdSchema,
+  }),
+  deleteProduct
+);
 
 export default router;

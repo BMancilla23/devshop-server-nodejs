@@ -1,7 +1,12 @@
+import { eq } from "drizzle-orm";
 import { Request, Response } from "express";
 import { db } from "../../db/index";
 import { productsTable } from "../../db/schemas/products";
-import { eq } from "drizzle-orm";
+import {
+  CreateProductInput,
+  ProductIdInput,
+  UpdateProductInput,
+} from "../../validations/product.validator";
 
 export const listProducts = async (req: Request, res: Response) => {
   try {
@@ -14,11 +19,12 @@ export const listProducts = async (req: Request, res: Response) => {
   }
 };
 
-export const getProductById = async (req: Request, res: Response) => {
+export const getProductById = async (
+  req: Request<ProductIdInput>,
+  res: Response
+): Promise<void> => {
   try {
-    const { id } = req.params;
-
-    // Agregar ordenar por id
+    const { id }: ProductIdInput = req.params;
 
     const [product] = await db
       .select()
@@ -27,7 +33,8 @@ export const getProductById = async (req: Request, res: Response) => {
 
     // Si el producto no existe, retornar un estado 404 (no encontrado)
     if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      res.status(404).json({ message: "Product not found" });
+      return;
     }
 
     // Retorna el producto encontrado en formato JSON
@@ -39,14 +46,16 @@ export const getProductById = async (req: Request, res: Response) => {
   }
 };
 
-export const createProduct = async (req: Request, res: Response) => {
+export const createProduct = async (
+  req: Request<unknown, CreateProductInput>,
+  res: Response
+) => {
   /*  console.log(req.body);
    */
   try {
-    const [product] = await db
-      .insert(productsTable)
-      .values(req.body)
-      .returning(); // Retorna el producto recién creado
+    const data: CreateProductInput = req.body;
+
+    const [product] = await db.insert(productsTable).values(data).returning(); // Retorna el producto recién creado
 
     /* console.log(product); */
 
@@ -60,25 +69,34 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const updateProduct = async (req: Request, res: Response) => {
+export const updateProduct = async (
+  req: Request<ProductIdInput, UpdateProductInput>,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
 
+    const data: UpdateProductInput = req.body;
+
     const [product] = await db
       .update(productsTable)
-      .set(req.body)
+      .set(data)
       .where(eq(productsTable.id, +id)) // Busca el producto con el ID correspondiente
       .returning(); // Retorna el producto actualizsdo
 
     if (!product) {
-      return res.status(404).json({ message: "Product not found" });
+      res.status(404).json({ message: "Product not found" });
+      return;
     }
 
     res.json({ message: "Product updated successfully", data: product });
   } catch (error) {}
 };
 
-export const deleteProduct = async (req: Request, res: Response) => {
+export const deleteProduct = async (
+  req: Request<ProductIdInput>,
+  res: Response
+): Promise<void> => {
   try {
     const { id } = req.params;
 
@@ -88,7 +106,8 @@ export const deleteProduct = async (req: Request, res: Response) => {
       .returning();
 
     if (!deletedProduct) {
-      return res.status(404).json({ message: "Product not found" });
+      res.status(404).json({ message: "Product not found" });
+      return;
     }
 
     res.status(204).json({ message: "Product deleted successfully" });
