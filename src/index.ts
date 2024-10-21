@@ -1,4 +1,5 @@
 import express from "express";
+import "module-alias/register";
 
 // Import the routes
 import productRoutes from "./routes/products/index";

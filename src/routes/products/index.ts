@@ -1,10 +1,5 @@
 import { Router } from "express";
-import { validateRequest } from "../../middlewares/validation.middleware";
-import {
-  createProductSchema,
-  productIdSchema,
-  updateProductSchema,
-} from "../../validations/product.validator";
+
 import {
   createProduct,
   deleteProduct,
@@ -12,6 +7,12 @@ import {
   listProducts,
   updateProduct,
 } from "./product.controller";
+import { validateRequest } from "@middlewares/validation.middleware";
+import {
+  createProductSchema,
+  productIdSchema,
+  updateProductSchema,
+} from "@validations/product.validator";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
+import { productsTable } from "@db/schemas/products";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { productsTable } from "../db/schemas/products";
 
 // Esquema para la creación de productos
 export const createProductSchema = createInsertSchema(productsTable)

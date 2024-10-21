@@ -1,12 +1,13 @@
 import { eq } from "drizzle-orm";
 import { Request, Response } from "express";
-import { db } from "../../db/index";
-import { productsTable } from "../../db/schemas/products";
+
+import { db } from "@db/index";
 import {
   CreateProductInput,
   ProductIdInput,
   UpdateProductInput,
-} from "../../validations/product.validator";
+} from "@validations/product.validator";
+import { productsTable } from "@db/schemas/products";
 
 export const listProducts = async (req: Request, res: Response) => {
   try {

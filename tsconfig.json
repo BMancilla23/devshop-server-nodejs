@@ -12,9 +12,18 @@
         "forceConsistentCasingInFileNames": true, // Fuerza el uso de mayúsculas en los nombres de archivos
         "noEmit": false, // Permitir emitir salida
         "isolatedModules": true, // Requerido para usar módulos ESM
-        "baseUrl": ".", // Permitir importaciones absolutas relativas en la raíz del proyecto
+        "baseUrl": "./src", // Permitir importaciones absolutas relativas en la raíz del proyecto
         "paths": {
-            "*": ["node_modules/*"] // Traducción de módulos globales
+            "*": ["node_modules/*"], // Traducción de módulos globales
+            "@db/*":["db/*"],
+            "@helpers/*":["helpers/*"],
+            "@services/*":["services/*"],
+            "@types/*":["types/*"],
+            "@middlewares/*":["middlewares/*"],
+            "@routes/*":["routes/*"],
+            "@utils/*":["utils/*"], // Traducción de módulos locales
+            "@validations/*":["validations/*"],
+            "@schemas/*":["db/schemas/*"]
         }
 
     }
