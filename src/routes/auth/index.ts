@@ -1,7 +1,11 @@
-import { validateRequest } from "@middlewares/validation.middleware";
-import { createUserSchema, loginUserSchema } from "@validations/user.validator";
+import { validateRequest } from "@middlewares/validation.middleware.js";
+
 import { Router } from "express";
-import { loginUser, registerUser } from "./user.controller";
+import { loginUser, registerUser } from "./user.controller.js";
+import {
+  createUserSchema,
+  loginUserSchema,
+} from "@validations/user.validator.js";
 
 const router = Router();
 

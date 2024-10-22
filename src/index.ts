@@ -1,9 +1,9 @@
 import express from "express";
-import "module-alias/register";
+import "module-alias/register.js"; // Esto permite resolver las rutas definidas en tsconfig.json
 
 // Import the routes
-import productRoutes from "./routes/products/index";
-import authRoutes from "./routes/auth/index";
+import productRoutes from "./routes/products/index.js";
+import authRoutes from "./routes/auth/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;

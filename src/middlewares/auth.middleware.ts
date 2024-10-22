@@ -2,11 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
 // Middleware para verificar el token JWT
-export function verifyToken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void {
+function verifyToken(req: Request, res: Response, next: NextFunction): void {
   /* const token = req.header("Authorization"); */
 
   const authHeader = req.header("Authorization");
@@ -57,7 +53,7 @@ export function verifyToken(
 }
 
 // Middleware para verificar roles
-export function verifyRole(allowedRoles: string[]) {
+function verifyRole(allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     const userRole = req.role;
 
@@ -70,3 +66,5 @@ export function verifyRole(allowedRoles: string[]) {
     next();
   };
 }
+
+export { verifyToken, verifyRole };

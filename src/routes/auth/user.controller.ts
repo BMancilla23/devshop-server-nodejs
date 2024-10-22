@@ -1,9 +1,12 @@
 // register controller
 
-import { CreateUserInput, LoginUserInput } from "@validations/user.validator";
+import {
+  CreateUserInput,
+  LoginUserInput,
+} from "@validations/user.validator.js";
 import { Request, Response } from "express";
-import { db } from "@db/index";
-import { usersTable } from "@db/schemas/users";
+import { db } from "@db/index.js";
+import { usersTable } from "@db/schemas/users.js";
 import { eq } from "drizzle-orm";
 import jwt from "jsonwebtoken";
 import argon2 from "argon2";
@@ -100,12 +103,10 @@ export const loginUser = async (
     } */
 
     if (!user) {
-      res
-        .status(401)
-        .json({
-          /* error: "Authentication failed - User not found" */ error:
-            "Auhenticated failed",
-        });
+      res.status(401).json({
+        /* error: "Authentication failed - User not found" */ error:
+          "Auhenticated failed",
+      });
       return;
     }
     //TODO: Eliminar try catch anidado solo era para comprobación de errores

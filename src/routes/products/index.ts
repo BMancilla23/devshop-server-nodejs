@@ -1,19 +1,19 @@
 import { Router } from "express";
 
-import { validateRequest } from "@middlewares/validation.middleware";
+import { verifyRole, verifyToken } from "@middlewares/auth.middleware.js";
+import { validateRequest } from "@middlewares/validation.middleware.js";
 import {
   createProductSchema,
   productIdSchema,
   updateProductSchema,
-} from "@validations/product.validator";
+} from "@validations/product.validator.js";
 import {
   createProduct,
   deleteProduct,
   getProductById,
   listProducts,
   updateProduct,
-} from "./product.controller";
-import { verifyRole, verifyToken } from "@middlewares/auth.midleware";
+} from "./product.controller.js";
 
 const router = Router();
 
