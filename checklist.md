@@ -22,6 +22,8 @@
 
 [X] ADD the `tsconfig.json`
 
+[X] ADD path alias with module-alias
+
 [X] Create the hello world express
 
 [X] Add the test script
@@ -57,3 +59,9 @@
 [X] Delete
 
 ## Data validation with ZOD
+
+[X] middleware
+
+[X] zod schema
+
+## Deploy to Genezlo
