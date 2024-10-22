@@ -3,6 +3,7 @@ import "module-alias/register";
 
 // Import the routes
 import productRoutes from "./routes/products/index";
+import authRoutes from "./routes/auth/index";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Use the routes
 app.use("/api/products", productRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

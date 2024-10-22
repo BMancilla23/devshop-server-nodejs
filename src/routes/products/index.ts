@@ -1,5 +1,11 @@
 import { Router } from "express";
 
+import { validateRequest } from "@middlewares/validation.middleware";
+import {
+  createProductSchema,
+  productIdSchema,
+  updateProductSchema,
+} from "@validations/product.validator";
 import {
   createProduct,
   deleteProduct,
@@ -7,12 +13,7 @@ import {
   listProducts,
   updateProduct,
 } from "./product.controller";
-import { validateRequest } from "@middlewares/validation.middleware";
-import {
-  createProductSchema,
-  productIdSchema,
-  updateProductSchema,
-} from "@validations/product.validator";
+import { verifyRole, verifyToken } from "@middlewares/auth.midleware";
 
 const router = Router();
 
@@ -28,6 +29,8 @@ router.get(
 
 router.post(
   "/",
+  verifyToken,
+  verifyRole(["admin", "seller"]),
   validateRequest({
     bodySchema: createProductSchema,
   }),
@@ -36,6 +39,8 @@ router.post(
 
 router.put(
   "/:id",
+  verifyToken,
+  verifyRole(["admin", "seller"]),
   validateRequest({
     paramsSchema: productIdSchema,
     bodySchema: updateProductSchema,
@@ -45,6 +50,8 @@ router.put(
 
 router.delete(
   "/:id",
+  verifyToken,
+  verifyRole(["admin"]),
   validateRequest({
     paramsSchema: productIdSchema,
   }),

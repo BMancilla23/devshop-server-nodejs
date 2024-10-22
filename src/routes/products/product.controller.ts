@@ -54,6 +54,8 @@ export const createProduct = async (
   /*  console.log(req.body);
    */
   try {
+    console.log(req.userId);
+
     const data: CreateProductInput = req.body;
 
     const [product] = await db.insert(productsTable).values(data).returning(); // Retorna el producto recién creado
@@ -87,11 +89,14 @@ export const updateProduct = async (
 
     if (!product) {
       res.status(404).json({ message: "Product not found" });
-      return;
+      return; // Aquí es importante el return para detener el flujo
     }
 
     res.json({ message: "Product updated successfully", data: product });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error: error });
+    return; // Por consistencia, añadimos return aquí también
+  }
 };
 
 export const deleteProduct = async (
@@ -112,8 +117,10 @@ export const deleteProduct = async (
     }
 
     res.status(204).json({ message: "Product deleted successfully" });
+    return;
   } catch (error) {
     /* console.error(error); */
     res.status(500).json({ message: "Internal server error", error: error });
+    return; // Se recomienda añadir return en catch para mantener consistencia
   }
 };
