@@ -1,6 +1,5 @@
 import { db } from "@db/index.js";
-import { orderItemsTable } from "@db/schemas/orders";
-import { ordersTable } from "@db/schemas/orders.js";
+import { ordersTable, orderItemsTable } from "@db/schemas/orders.js";
 
 import {
   CreateOrderWithItemsInput,
